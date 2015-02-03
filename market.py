@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, make_response, url_for, sessi
 from flask.ext.mysql import MySQL
 from werkzeug.security import check_password_hash, generate_password_hash
 import json
+import time
+from datetime import datetime
 
 # configuration
 DEBUG = True
@@ -68,7 +70,7 @@ def before_request():
     print type(g.db)
     g.user = None
     if 'user_id' in session:
-        g.user = query_db('select * from user where email = %s',
+        g.user = query_db('select * from User where UserEmail = %s',
                           [session['user_id']], one=True)
 
 
@@ -88,7 +90,7 @@ def index():
 
 @app.route('/main')
 def to_main():
-    return render_template('main.html')
+    return render_template('main_test.html')
 
 
 @app.route('/register')
@@ -192,5 +194,5 @@ def base_test():
 
 
 if __name__ == "__main__":
-    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+    # app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True)
