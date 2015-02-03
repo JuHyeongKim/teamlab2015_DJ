@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Dom Object Handling Example</title>
+
+</head>
+<body>
+<H1> 안녕하세요. 생활 코딩 참가자 명단입니다. </H1>
+<H2> 참가자 정보를 입력하세요. </H2>
+<dl id="insert_form">
+    <dt>이름 </dt>
+    <dd> <INPUT type="text" value=""></dd>
+    <dt>아이디 </dt>
+    <dd> <INPUT type="text" value=""></dd>
+    <dt>프로젝트명</dt>
+    <dd> <INPUT type="text" value=""></dd>
+</dl>
+
+<INPUT type="button" value="추가" onclick=addNewMember()>
+
+<TABLE id="information_table">
+    <TR>
+        <TH> 이름 </TH>
+        <TH> 아이디 </TH>
+        <TH> 프로젝트명</TH>
+    </TR>
+    <TR>
+        <TD> 최성철 </TD>
+        <TD> ADMIN </TD>
+        <TD> 프로젝트 관리 </TD>
+    </TR>
+</TABLE>
+
+<script language="JavaScript">
+
+    var td = document.getElementsByTagName("TD");
+    for (var i = 0; i< td.length; i++){
+        td[i].addEventListener("mouseover", changeColur);
+        td[i].addEventListener("mouseout", returnColur);
+    }
+
+
+    function changeColur() {
+        this.style.color = "#ff0000";
+    };
+
+    function returnColur() {
+        this.style.color = "black";
+    };
+
+
+
+    function addNewMember(){
+        var insert_form = document.getElementById("insert_form");
+        var text_field = insert_form.getElementsByTagName("INPUT");
+
+        var isValidateForm;
+        for (var i = 0; i < text_field.length ; i++){
+            if (text_field[i].value.length == 0) {
+                text_field[i].placeholder = "값을 입력해주세요";
+                isValidateForm= false;
+            }
+        }
+
+        if (isValidateForm == false) {
+            return;
+        }
+
+
+        var information_table = document.getElementById("information_table");
+        var table_body = information_table.getElementsByTagName("tbody")[0];
+
+        var tr = document.createElement('tr');
+        var nametd = document.createElement('td');
+        nametd.innerHTML = text_field[0].value;
+
+        var idtd = document.createElement('td');
+        idtd.innerHTML = text_field[1].value;
+
+        var projecttd = document.createElement('td');
+        projecttd.innerHTML = text_field[1].value;
+
+        tr.appendChild(nametd);
+        tr.appendChild(idtd);
+        tr.appendChild(projecttd);
+
+        table_body.appendChild(tr);
+
+    }
+</script>
+</body>
+</html>

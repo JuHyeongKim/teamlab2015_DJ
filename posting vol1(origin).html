@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>중고장터 글쓰기</title>
+    <link rel="stylesheet" href="posting_css.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords"
+          content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
+    <meta name="description"
+          content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
+    <link href="bootstrap-wysiwyg-master/external/google-code-prettify/prettify.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <link
+            href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
+            rel="stylesheet" />
+    <script
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap-wysiwyg-master/external/jquery.hotkeys.js"></script>
+    <script
+            src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="bootstrap-wysiwyg-master/external/google-code-prettify/prettify.js"></script>
+    <link href="bootstrap-wysiwyg-master/css/style.css" rel="stylesheet" />
+    <script src="bootstrap-wysiwyg-master/src/bootstrap-wysiwyg.js"></script>
+
+    <style>
+
+        .container-fluid {
+            padding: 0px;
+            background-color: #ff60a2;
+        }
+
+        .navbar-brand {
+            position: relative;
+            topr:0px;
+            left: 650px;
+            font-size: 33px;
+
+        }
+
+        .user_nav {
+            position: relative;
+            top: -67px;
+        }
+
+        #editor {
+
+            /*margin: 0px;*/
+
+            /*height: 250px;*/
+        }
+
+        .container {
+            position: relative;
+            top: 100px;
+        }
+
+        .form-inline {
+            position: relative;
+            left: 0px;
+            /*width: 300px;*/
+        }
+
+        .upload {
+            width: 150px;
+            height: 30px;
+        }
+
+
+    </style>
+
+    <script>
+
+        $(function(){
+            function initToolbarBootstrapBindings() {
+                var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                            'Times New Roman', 'Verdana'],
+                        fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+                $.each(fonts, function (idx, fontName) {
+                    fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+                });
+                $('a[title]').tooltip({container:'body'});
+                $('.dropdown-menu input').click(function() {return false;})
+                        .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+                        .keydown('esc', function () {this.value='';$(this).change();});
+
+                $('[data-role=magic-overlay]').each(function () {
+                    var overlay = $(this), target = $(overlay.data('target'));
+                    overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+                });
+                if ("onwebkitspeechchange"  in document.createElement("input")) {
+                    var editorOffset = $('#editor').offset();
+                    //$('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
+                } else {
+                    $('#voiceBtn').hide();
+                }
+            };
+            function showErrorAlert (reason, detail) {
+                var msg='';
+                if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+                else {
+                    console.log("error uploading file", reason, detail);
+                }
+                $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+            };
+            initToolbarBootstrapBindings();
+            $('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
+            window.prettyPrint && prettyPrint();
+        });
+
+    </script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="main vol1(origin).html"><font color="#7fffd4">중고장터</font></a>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+    <div class="user_nav">
+        <td>
+            <a id="mypage" href="#">마이페이지</a>
+        </td>
+        <td>
+            <a id="logout" href="#">로그아웃</a>
+        </td>
+    </div>
+</div>
+<!--<div class="writing">-->
+    <!--&lt;!&ndash;<td>글쓰기</td>&ndash;&gt;-->
+
+<!--<table id="posting_table">-->
+    <!--<tr>-->
+        <!--<td id="nickname">닉네임</td>-->
+        <!--<td><input type="text" id="nickname_text"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td id="passwd">비밀번호</td>-->
+        <!--<td><input type="password" id="users_passwd"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td id="post_title">제목</td>-->
+        <!--<td><input type="text" id="posting_title"></td>-->
+    <!--</tr>-->
+<!--</table>-->
+<!--<textarea id="posting_content" rows="15" cols="70"></textarea>-->
+<!--</div>-->
+<!--<input type="button" id="go_to_bulletin_board" value="목록">-->
+<!--<input type="submit" id="submit" value="올리기">-->
+
+
+<!--<form class="form-inline" role="form">-->
+    <!--<div class="form-group">-->
+        <!--<label for="email">Email:</label>-->
+        <!--<input type="email" class="form-control" id="email" placeholder="Enter email">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="pwd">Password:</label>-->
+        <!--<input type="password" class="form-control" id="pwd" placeholder="Enter password">-->
+    <!--</div>-->
+    <!--<div class="checkbox">-->
+        <!--<label><input type="checkbox"> Remember me</label>-->
+    <!--</div>-->
+    <!--<button type="submit" class="btn btn-default">Submit</button>-->
+<!--</form>-->
+
+
+
+<div class="container">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label for="posting_title">제목:</label>
+            <input type="text" class="form-control" id="posting_title">
+        </div>
+    </form>
+    <div class="hero-unit">
+        <div class="pull-right"></div>
+        <hr />
+        <div id="alerts"></div>
+        <div class="btn-toolbar" data-role="editor-toolbar"
+             data-target="#editor">
+            <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                   title="Font"><i class="icon-font"></i><b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                   title="Font Size"><i class="icon-text-height"></i>&nbsp;<b
+                        class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a data-edit="fontSize 5"><font size="5">Huge</font>
+                    </a>
+                    </li>
+                    <li><a data-edit="fontSize 3"><font size="3">Normal</font>
+                    </a>
+                    </li>
+                    <li><a data-edit="fontSize 1"><font size="1">Small</font>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default" data-edit="bold"
+                   title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i>
+                </a> <a class="btn btn-default" data-edit="italic"
+                        title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i>
+            </a> <a class="btn btn-default" data-edit="strikethrough"
+                    title="Strikethrough"><i class="icon-strikethrough"></i>
+            </a> <a class="btn btn-default" data-edit="underline"
+                    title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i>
+            </a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default" data-edit="insertunorderedlist"
+                   title="Bullet list"><i class="icon-list-ul"></i>
+                </a> <a class="btn btn-default" data-edit="insertorderedlist"
+                        title="Number list"><i class="icon-list-ol"></i>
+            </a> <a class="btn btn-default" data-edit="outdent"
+                    title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i>
+            </a> <a class="btn btn-default" data-edit="indent" title="Indent (Tab)"><i
+                    class="icon-indent-right"></i>
+            </a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default" data-edit="justifyleft"
+                   title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i>
+                </a> <a class="btn btn-default" data-edit="justifycenter"
+                        title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i>
+            </a> <a class="btn btn-default" data-edit="justifyright"
+                    title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i>
+            </a> <a class="btn btn-default" data-edit="justifyfull"
+                    title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i>
+            </a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                   title="Hyperlink"><i class="icon-link"></i>
+                </a>
+                <div class="dropdown-menu input-append">
+                    <input class="span2" placeholder="URL" type="text"
+                           data-edit="createLink" />
+                    <button class="btn" type="button">Add</button>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default" data-edit="unlink"
+                   title="Remove Hyperlink"><i class="icon-cut"></i>
+                </a> <a class="btn btn-default"
+                        title="Insert picture (or just drag & drop)" id="pictureBtn">
+                <i class="icon-picture"></i> <input type="file"
+                                                    data-role="magic-overlay" data-target="#pictureBtn"
+                                                    data-edit="insertImage" /> </a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default" data-edit="undo"
+                   title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i>
+                </a> <a class="btn btn-default" data-edit="redo"
+                        title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i>
+            </a>
+            </div>
+            <input class="pull-right" type="text" data-edit="inserttext"
+                   id="voiceBtn" x-webkit-speech="" />
+        </div>
+        <div id="editor" class="lead"></div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="posting_password" placeholder="비밀번호를 입력해주세요.">
+                <button type="button" class="upload">올리기</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
