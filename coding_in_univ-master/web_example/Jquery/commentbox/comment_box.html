@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <style type="text/css">
+        .lp-block		{ width:400px; float:left; }
+        .lp-block input, .lp-block textarea { width:90%; }
+        #live-preview-display 	{ background:#eee; padding:10px; margin-left:50px; margin-top:20px; }
+        #lp-name { font-weight:bold; }
+        #lp-avatar { float:right; margin:0 0 20px 20px; }
+        #lp-comment { padding-top:10px; font-style:italic; line-height:19px; }
+    </style>
+    <script language="javascript">
+        $(document).ready(function() {
+            var commentNode = $('#lp-comment'),
+                    nameNode = $('#lp-name'),
+                    name = $('#name'),
+                    website = $('#website');
+
+            //comment...easy
+            $('#live-preview-form input, #live-preview-form textarea').bind('blur keyup',function() {
+                //comment
+                commentNode.text($('#comment').val());
+                commentNode.html($('#lp-comment').html().replace(/\n/g,'<br />'));
+
+                //name & websites
+                if($('#name').val()) {
+                    if(website.val() && /http:\/\/[A-Za-z0-9\.-]{3,}\.[A-Za-z]{2}/.test(website.val())) {
+                        nameNode.html('<a href="' + website.val() + '">' + name.val() + '</a> says:');
+                    }
+                    else {
+                        nameNode.text(name.val() + ' says:');
+                    }
+                }
+
+                //gravatar
+                if($('#email').val() && /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test($('#email').val())) {
+                    var md5Email = MD5($('#email').val());
+                    $('#lp-avatar').html('<img src="http://www.gravatar.com/avatar.php?gravatar_id=' + md5Email + '&size=80&rating=G&default=http%3A%2F%2Fdavidwalsh.name%2Fwp-content%2Fthemes%2Fdavid-walsh%2Fgraphics%2Fcom.jpg" alt="' + $('#lp-name').val() + '" />');
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div id="live-preview-form" class="lp-block">
+    <p>
+        <strong>Your Name:</strong><br />
+        <input type="text" name="name" id="name" value="" class="input" /><br /><br />
+        <strong>Your Email:</strong><br />
+        <input type="text" name="email" id="email" value="" class="input" /><br /><br />
+        <strong>Your Website:</strong><br />
+        <input type="text" name="website" id="website" value="" class="input" /><br /><br />
+        <strong>Your Comment:</strong><br />
+        <textarea name="comment" id="comment" class="input" rows="10"></textarea>
+    </p>
+</div>
+
+<div id="live-preview-display" class="lp-block">
+    <div id="lp-avatar"></div>
+    <div id="lp-name"></div>
+    <div id="lp-comment"></div>
+</div>
+</body>
+</html>

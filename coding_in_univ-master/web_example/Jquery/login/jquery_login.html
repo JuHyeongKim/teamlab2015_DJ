@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>This is my first html page.</title>
+    <link rel="stylesheet" type="text/css" href="mycss.css">
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script language="javascript">
+        $(function() {
+            $('#submit_button').click(
+                    function () {
+                        var password = $("#password").val();
+                        var id = $("#ID").val();
+
+                        if (id != "teamlab"){
+                            $("password_waring_caption").html("Check Your ID");
+                            return false;
+                        }
+
+
+                        if (password != "1234"){
+                            $("#password_waring_caption").html("Check Your password");
+                        }else{
+                            $("#password_waring_caption").html("");
+                            document.forms["login_form"].submit();
+
+                        }
+                        return false;
+
+                    }
+            );
+        });
+
+
+    </script>
+
+
+</head>
+<body>
+
+<header id="header">
+    <dl class="tema_logo">
+        <dt> TEAM LAB</dt>
+    </dl>
+</header>
+
+
+<section id="main">
+    <div id="login_information_area">
+        <dl class="login_information">
+            <dt>로그인</dt>
+            <dt>아이디와 비밀번호를 입력하세요</dt>
+        </dl>
+
+        <form id="login_form" action="login_validate.html" method="get" >
+            <table class="login_input_field">
+                <tr id="login_id">
+                    <td > ID:</td>
+                    <td> <input type="text" id="ID" name="ID"/> </td>
+                </tr>
+
+                <tr id="login_password">
+                    <td>Password: </td>
+                    <td><input type="password" name="password" id="password"/> </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" id="submit_button">Submit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="password_waring_caption">
+
+                    </td>
+                </tr>
+            </table>
+
+        </FORM>
+    </div>
+
+</section>
+
+</body>
+</html>

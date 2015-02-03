@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body id="main">
+
+<script style="text/javascript">
+    function getSearchParameters() {
+        var prmstr = window.location.search.substr(1);
+        return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    }
+
+    function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+    }
+
+    function getTimeStamp() {
+        var d = new Date();
+
+        var s =
+                leadingZeros(d.getFullYear(), 4) + '-' +
+                leadingZeros(d.getMonth() + 1, 2) + '-' +
+                leadingZeros(d.getDate(), 2) + ' ' +
+
+                leadingZeros(d.getHours(), 2) + ':' +
+                leadingZeros(d.getMinutes(), 2) + ':' +
+                leadingZeros(d.getSeconds(), 2);
+
+        return s;
+    }
+
+    function leadingZeros(n, digits) {
+        var zero = '';
+        n = n.toString();
+
+        if (n.length < digits) {
+            for (i = 0; i < digits - n.length; i++)
+                zero += '0';
+        }
+        return zero + n;
+    }
+
+
+
+    var params = getSearchParameters();
+    document.getElementById("main").innerHTML=params.ID + "님 환영합니다 <br/>" + getTimeStamp();
+
+</script>
+
+</body>
+</html>
