@@ -1,119 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>nav_example</title>
+{% extends "layout.html" %}
+{% block title %}로그인{% endblock %}
+{% block body %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<style>
+    /* Custom page CSS
+    -------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
 
-    <link href="https//netdna.bootstrapcdn.com/twitter-bootstrap/{version}/css/bootstrap-combined.min.css" rel="stylesheet">
+    #wrap > .container {
+        padding: 60px 15px 0;
+    }
+    .container .credit {
+        margin: 20px 0;
+    }
 
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/{version}/js/bootstrap.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    #footer > .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    code {
+        font-size: 80%;
+    }
 
-    <style>
-        /* Sticky footer styles
--------------------------------------------------- */
-
-        html,
-        body {
-            height: 100%;
-            /* The html and body elements cannot have any padding or margin. */
-        }
-
-        /* Wrapper for page content to push down footer */
-        #wrap {
-            min-height: 100%;
-            height: auto !important;
-            height: 100%;
-            /* Negative indent footer by its height */
-            margin: 0 auto -60px;
-            /* Pad bottom by footer height */
-            padding: 0 0 60px;
-        }
-
-        /* Set the fixed height of the footer here */
-        #footer {
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-
-
-        /* Custom page CSS
-        -------------------------------------------------- */
-        /* Not required for template or sticky footer method. */
-
-        #wrap > .container {
-            padding: 60px 15px 0;
-        }
-        .container .credit {
-            margin: 20px 0;
-        }
-
-        #footer > .container {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        code {
-            font-size: 80%;
-        }
-
-        .navbar-brand {
-            font-size: 30px;
-        }
-        #upper_navbar {
-            background-color: #ff60a2;
-        }
-
+    .navbar-brand {
+        font-size: 30px;
+    }
+    #upper_navbar {
+        background-color: #ff60a2;
+    }
 
     </style>
-</head>
-<body>
 
 <!-- Wrap all page content here -->
 <div id="wrap">
-
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" id="upper_navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="main%20vo2(origin).html">중고장터</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="join vol2-nav vol1.html">회원가입</a></li>
-                    <li><a href="find_ID.html">아이디 찾기</a></li>
-                    <li><a href="find_password.html">비밀번호 찾기</a></li>
-                    <!--<li class="dropdown">-->
-                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a href="#">Action</a></li>-->
-                            <!--<li><a href="#">Another action</a></li>-->
-                            <!--<li><a href="#">Something else here</a></li>-->
-                            <!--<li class="divider"></li>-->
-                            <!--<li class="dropdown-header">Nav header</li>-->
-                            <!--<li><a href="#">Separated link</a></li>-->
-                            <!--<li><a href="#">One more separated link</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
-
-
 
     <div class="container" id="sign_in">
         <div class="page-header">
@@ -159,24 +79,24 @@
                 </div>
             </div>
 
-            <!-- 비밀번호 찾기 질문, 답 할지 고민해보자 -->
-            <div class="form-group">
-                <label class="control-label col-sm-offset-2 col-sm-3" for="question_finding_psswd">비밀번호 찾기 질문:</label>
-                <div class="col-sm-4">
-                    <select class="form-control" id="question_finding_psswd">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-offset-2 col-sm-3" for="answer_finding_passwd">질문의 답:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="answer_finding_passwd" placeholder="질문의 답">
-                </div>
-            </div>
+            <!--&lt;!&ndash; 비밀번호 찾기 질문, 답 할지 고민해보자 &ndash;&gt;-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-offset-2 col-sm-3" for="question_finding_psswd">비밀번호 찾기 질문:</label>-->
+                <!--<div class="col-sm-4">-->
+                    <!--<select class="form-control" id="question_finding_psswd">-->
+                        <!--<option>1</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-offset-2 col-sm-3" for="answer_finding_passwd">질문의 답:</label>-->
+                <!--<div class="col-sm-4">-->
+                    <!--<input type="text" class="form-control" id="answer_finding_passwd" placeholder="질문의 답">-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="form-group">
                 <div class="col-sm-offset-6 col-sm-5">
                     <button type="button" id="sign_up" class="btn btn-success">가입하기</button>
@@ -186,12 +106,10 @@
     </div>
 </div>
 
-<div id="footer">
-    <div class="container">
-        <!--<p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>-->
-        <p>가천대학교 산업경영공학과 김주형, 백지호</p>
-    </div>
-</div>
-
-</body>
-</html>
+<!--<div id="footer">-->
+    <!--<div class="container">-->
+        <!--&lt;!&ndash;<p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>&ndash;&gt;-->
+        <!--<p>가천대학교 산업경영공학과 김주형, 백지호</p>-->
+    <!--</div>-->
+<!--</div>-->
+{% endblock %}

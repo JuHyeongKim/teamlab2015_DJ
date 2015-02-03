@@ -90,17 +90,29 @@ def index():
 
 @app.route('/main')
 def to_main():
-    return render_template('main_test.html')
+    return render_template('main.html')
 
 
 @app.route('/register')
-def register_user():
+def to_register_user():
     return render_template('register.html')
+
+@app.route('/mypage')
+def to_mypage():
+    return render_template('mypage.html')
+
+@app.route('/findID')
+def to_find_id():
+    return render_template('find_ID.html')
+
+@app.route('/findPassword')
+def to_find_password():
+    return render_template('find_password.html')
 
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('login_failed.html')
 
 
 @app.route('/registerUser', methods=["POST"])
@@ -114,7 +126,6 @@ def insert_new_user():
     #     email = request.form['useremail']
     #     password = generate_password_hash(request.form['UserPassword'])
     #     print(password)
-    #
     if request.method == 'POST':
         if not request.form['UserID']:
             error = 'You have to enter a ID'
@@ -178,7 +189,7 @@ def server_list():
     return render_template('serverlist.html')
 
 
-@app.route('/deleteuser', methods=["POST"])
+@app.route('/deleteUser', methods=["POST"])
 def delete_user_ajax():
     if request.method == "POST":
         email = request.form['email']
