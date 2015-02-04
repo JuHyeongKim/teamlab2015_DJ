@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>click posting</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <link href="https//netdna.bootstrapcdn.com/twitter-bootstrap/{version}/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/{version}/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <link class="cssdeck" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            /* The html and body elements cannot have any padding or margin. */
+        }
+
+        /* Wrapper for page content to push down footer */
+        #wrap {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            /* Negative indent footer by its height */
+            margin: 0 auto -60px;
+            /* Pad bottom by footer height */
+            padding: 0 0 60px;
+        }
+
+        /* Set the fixed height of the footer here */
+        #footer {
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+        .navbar-brand {
+            font-size: 30px;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="main%20vol1(origin).html">중고장터</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" id="bulletin_board">
+        <div id="content">
+            <section class="main_section">
+                <table class="table table-hover" id="posting_table">
+                    <tr class="posting_element">
+                        <td>
+                            제목: <strong>산업경영공학개론/상태좋음/박찬웅</strong>
+                        </td>
+                        <td >
+                            글쓴이: 글쓴이1
+                        </td>
+                        <td >
+                            작성일: 2015/01/20
+                        </td>
+                        <td>
+                            조회수: 123
+                        </td>
+                        <td >
+                            댓글: 1
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+
+
+    <form class="well span12">
+        <div class="row">
+            <div class="span3">
+                <label>First Name</label>
+                <input type="text" class="span3" placeholder="Your First Name">
+                <label>Last Name</label>
+                <input type="text" class="span3" placeholder="Your Last Name">
+                <label>Email Address</label>
+                <input type="text" class="span3" placeholder="Your email address">
+                <label>Subject
+                    <select id="subject" name="subject" class="span3">
+                        <option value="na" selected="">Choose One:</option>
+                        <option value="service">General Customer Service</option>
+                        <option value="suggestions">Suggestions</option>
+                        <option value="product">Product Support</option>
+                    </select>
+                </label>
+            </div>
+            <div class="span5">
+                <label>Message</label>
+                <textarea name="message" id="message" class="input-xlarge span5" rows="10"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary pull-right">Send</button>
+        </div>
+    </form>
+</div>
+<div id="footer">
+    <div class="container">
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+    </div>
+</div>
+
+</body>
+</html>

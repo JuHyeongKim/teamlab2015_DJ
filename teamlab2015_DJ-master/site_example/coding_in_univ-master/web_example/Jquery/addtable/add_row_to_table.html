@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+
+    <script language="javascript">
+        $(document).ready(function() {
+            var t = $('#example').DataTable();
+            var counter = 1;
+
+            $('#addRow').on( 'click', function () {
+                t.row.add( [
+                    counter +'.1',
+                    counter +'.2',
+                    counter +'.3',
+                    counter +'.4',
+                    counter +'.5'
+                ] ).draw();
+
+                counter++;
+            } );
+
+            // Automatically add a first row of data
+            $('#addRow').click();
+        } );
+    </script>
+</head>
+<body>
+<input type="button" id="addRow" value="Add Row">
+
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+        <th>Column 4</th>
+        <th>Column 5</th>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+        <th>Column 4</th>
+        <th>Column 5</th>
+    </tr>
+    </tfoot>
+
+</table>
+
+</body>
+</html>

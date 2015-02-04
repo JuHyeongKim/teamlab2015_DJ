@@ -1,0 +1,180 @@
+{% extends "layout.html" %}
+{% block title %}환영합니다{% endblock %}
+{% block body %}
+
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+    <!-- Fixed navbar -->
+    <div class="container" id="bulletin_board">
+        <nav id="main_navigation">
+            <form role="form">
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">글쓴이
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">제목
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="">내용
+                </label>
+                <input class="search" type="text" placeholder="검색어를 입력하세요"/>
+                <input class="search_button" type="button" value="검색" />
+            </form>
+            <!--<div class="search_part">-->
+                <!--<input class="search" type="text" placeholder="검색어를 입력하세요"/>-->
+                <!--<input class="search_button" type="button" value="검색" />-->
+            <!--</div>-->
+        </nav>
+        <div id="content">
+            <section class="main_section">
+                <table class="table table-hover" id="posting_table">
+                    <tr class="posting_element">
+                        <td>
+                            <strong>글 번호</strong>
+                        </td>
+                        <td>
+                            <strong>글쓴이</strong>
+                        </td>
+                        <td>
+                            <strong>제목</strong>
+                        </td>
+                        <td>
+                            <strong>거래상황</strong>
+                        </td>
+                        <td>
+                            <strong>조회수</strong>
+                        </td>
+                        <td>
+                            <strong>올린 날</strong>
+                        </td>
+                        <td>
+                            <strong>종류</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>61</td>
+                        <td>글쓴이1</td>
+                        <td>산업경영공학개론/상태좋음/박찬웅</td>
+                        <td>미판매</td>
+                        <td>1</td>
+                        <td>2015/01/20</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>70</td>
+                        <td>글쓴이2</td>
+                        <td>경영학원론팜관순이형꺼레알새책</td>
+                        <td>판매완료</td>
+                        <td>21</td>
+                        <td>2015/01/23</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>글쓴이3</td>
+                        <td>반값_교양_언어와마음</td>
+                        <td>미판매</td>
+                        <td>3</td>
+                        <td>2014/07/17</td>
+                        <td>교양</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>글쓴이4</td>
+                        <td>미산정책</td>
+                        <td>미판매</td>
+                        <td>10</td>
+                        <td>2014/05/10</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>53</td>
+                        <td>글쓴이5</td>
+                        <td>어쩔수없이사야하는경제학원론(카푸치노교수꺼)</td>
+                        <td>판매완료</td>
+                        <td>7</td>
+                        <td>2015/01/10</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td>글쓴이6</td>
+                        <td>방송학개론</td>
+                        <td>판매완료</td>
+                        <td>12</td>
+                        <td>2014/08/30</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>글쓴이4</td>
+                        <td>미산정책</td>
+                        <td>미판매</td>
+                        <td>10</td>
+                        <td>2014/05/10</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>글쓴이4</td>
+                        <td>미산정책</td>
+                        <td>미판매</td>
+                        <td>10</td>
+                        <td>2014/05/10</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>글쓴이4</td>
+                        <td>미산정책</td>
+                        <td>미판매</td>
+                        <td>10</td>
+                        <td>2014/05/10</td>
+                        <td>전공</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>글쓴이4</td>
+                        <td>미산정책</td>
+                        <td>미판매</td>
+                        <td>10</td>
+                        <td>2014/05/10</td>
+                        <td>전공</td>
+                    </tr>
+                </table>
+
+                <ul class="pagination" id="pagination">
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#">9</a></li>
+                    <li><a href="#">»</a></li>
+                    <!--<ul class="nav navbar-nav navbar-right">-->
+                        <!--<li><a href="posting%20vol2.html" id="writing" type="button"  class="btn btn-default">글쓰기</a></li>-->
+                    <!--</ul>-->
+                </ul>
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                <a href="posting.html" id="writing" type="button"  class="btn btn-default pull-right btn-md">글쓰기</a>
+                <!--</ul>-->
+                <!--<a href="posting%20vol2.html" id="writing" type="button"  class="btn btn-default">글쓰기</a>-->
+            </section>
+
+        </div>
+
+    </div>
+    
+</div>
+<!--<div id="footer">-->
+    <!--<div class="container">-->
+        <!--&lt;!&ndash;<p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>&ndash;&gt;-->
+        <!--<p>가천대학교 산업경영공학과 김주형, 백지호</p>-->
+    <!--</div>-->
+<!--</div>-->
+{% endblock %}
