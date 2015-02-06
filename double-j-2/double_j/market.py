@@ -1,9 +1,11 @@
+#-*- coding:utf-8-*-
+
 from flask import Flask, render_template, request, make_response, url_for, session, g, redirect, abort, flash
 from flask.ext.mysql import MySQL
 from werkzeug.security import check_password_hash, generate_password_hash
 import json
-import time
-from datetime import datetime
+# import time
+# from datetime import datetime
 
 # configuration
 DEBUG = True
@@ -111,51 +113,69 @@ def to_find_password():
 
 
 @app.route('/login')
-def login():
+def to_login():
     return render_template('login_failed.html')
 
+@app.route('/posting')
+def to_posting():
+    return render_template('posting.html')
 
 @app.route('/registerUser', methods=["POST"])
 def insert_new_user():
-    if g.user:
-        return redirect(url_for('to_main'))
-    error = None
-    # if request.method == "POST":
-    # # name = request.form['username']
-    #     id = request.form['UserID']
-    #     email = request.form['useremail']
-    #     password = generate_password_hash(request.form['UserPassword'])
-    #     print(password)
+    print "A"
+    # if g.user:
+    #     return redirect(url_for('to_main'))
+    error=None
     if request.method == 'POST':
-        if not request.form['UserID']:
-            error = 'You have to enter a ID'
-        elif not request.form['UserEmail'] or \
-                        '@' not in request.form['UserEmail']:
-            error = 'You have to enter a valid email address'
-        elif not request.form['UserPassword']:
-            error = 'You have to enter a password'
-        elif request.form['UserPassword'] != request.form['UserPassword_2']:
-            error = 'The two passwords do not match'
-        elif get_user_id(request.form['username']) is not None:
-            error = 'The username is already taken'
+        id = request.form['UserID']
+        password = generate_password_hash(request.form['UserPassword'])
+        email = request.form['UserEmail']
+        nickname = request.form['UserNickname']
+        password_check_1 = request.form['userPassword']
+        password_check_2 = request.form['UserPassword_2']
+
+        if not id:
+            error = 'Please input the ID'
+            print "a"
+
+        elif not password:
+            error = 'Please input the Password'
+            print "b"
+
+        elif password_check_1 != password_check_2:
+            error = 'Please input again Password check'
+            print "c"
+
+        elif not nickname:
+            error = 'Please input the Nickname'
+            print "d"
+
+        elif not email or \
+                        '@' not in email:
+            error = 'Please input the Email'
+            print "e"
+
+        elif get_user_id(id) is not None:
+
+            error = 'The ID is already exists. Please input another ID'
         else:
             g.db.execute('''insert into User (
-                UserID, UserEmail, UserPassword) values (?, ?, ?)''',
-                         [request.form['username'], request.form['email'],
-                          generate_password_hash(request.form['password'])])
+                UserID, UserEmail, UserPassword, UserNickname) values (%s, %s, %s, %s)''',
+                         [id, email, password, nickname])
             g.db.commit()
-            flash('You were successfully registered and can login now')
+            flash('Thank you for registration. Now you can login')
             return redirect(url_for('login'))
 
             # g.db.execute('''insert into user (id, name, email, password) values (%s, %s, %s, %s)''', [id, name, email, password])
             # return redirect(url_for('login'))
 
 
-    return "Error"
+    return render_template('register.html', error=error)
 
 
 @app.route('/check_login', methods=["POST"])
 def login_check():
+    print "B"
     if request.method == "POST":
         user = query_db('''select * from User where UserID = %s''', [request.form['UserID']], one=True)
 
@@ -191,6 +211,7 @@ def server_list():
 
 @app.route('/deleteUser', methods=["POST"])
 def delete_user_ajax():
+    print "C"
     if request.method == "POST":
         email = request.form['email']
         print '''DELETE FROM user WHERE email=%s''', [email]
@@ -205,5 +226,5 @@ def base_test():
 
 
 if __name__ == "__main__":
-    # app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True)

@@ -1,8 +1,13 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}글 작성{% endblock %}
+
+
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>posting vol2</title>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='posting_css.css') }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -29,7 +34,8 @@
             href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
             rel="stylesheet" />
     <script src="bootstrap-wysiwyg-master/external/jquery.hotkeys.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script
+            src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="bootstrap-wysiwyg-master/external/google-code-prettify/prettify.js"></script>
     <link href="bootstrap-wysiwyg-master/css/style.css" rel="stylesheet" />
     <script src="bootstrap-wysiwyg-master/src/bootstrap-wysiwyg.js"></script>
@@ -107,42 +113,13 @@
 
 
 </head>
+
+{% block body %}
 <body>
 <!-- Wrap all page content here -->
 <div id="wrap">
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="main%20vol1(origin).html">중고장터</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="join(origin).html">회원가입</a></li>
-                    <li><a href="find_ID.html">아이디 찾기</a></li>
-                    <li><a href="find_password.html">비밀번호 찾기</a></li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                    </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
     <div class="container">
         <form class="form-inline" role="form">
             <div class="form-group">
@@ -252,12 +229,13 @@
         </div>
     </div>
 </div>
-<div id="footer">
-    <div class="container">
-        <!--<p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>-->
-        <p>가천대학교 산업경영공학과 김주형, 백지호</p>
-    </div>
-</div>
+<!--<div id="footer">-->
+    <!--<div class="container">-->
+        <!--&lt;!&ndash;<p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>&ndash;&gt;-->
+        <!--<p>가천대학교 산업경영공학과 김주형, 백지호</p>-->
+    <!--</div>-->
+<!--</div>-->
 
+{% endblock %}
 </body>
 </html>

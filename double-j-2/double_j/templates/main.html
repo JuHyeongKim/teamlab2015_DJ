@@ -52,6 +52,17 @@
                             <strong>종류</strong>
                         </td>
                     </tr>
+                    <!--<tr>-->
+                        <!--{% for postingID in PostingID %}-->
+                            <!--<td>{{postingID}}</td>-->
+                            <!--<td>{{Posting.Poster}}</td>-->
+                            <!--<td>{{Posting.Title}}</td>-->
+                            <!--<td>{{Posting.TradeOrNot}}</td>-->
+                            <!--<td>{{Posting.View}}</td>-->
+                            <!--<td>{{Posting.CreatedDate}}</td>-->
+                            <!--<td>{{Posting.Category}}</td>-->
+                        <!--{% endfor %}-->
+                    <!--</tr>-->
                     <tr>
                         <td>61</td>
                         <td>글쓴이1</td>
@@ -161,7 +172,7 @@
                     <!--</ul>-->
                 </ul>
                 <!--<ul class="nav navbar-nav navbar-right">-->
-                <a href="posting.html" id="writing" type="button"  class="btn btn-default pull-right btn-md">글쓰기</a>
+                <a href="{{ url_for('to_posting') }}" id="writing" type="button"  class="btn btn-default pull-right btn-md">글쓰기</a>
                 <!--</ul>-->
                 <!--<a href="posting%20vol2.html" id="writing" type="button"  class="btn btn-default">글쓰기</a>-->
             </section>
