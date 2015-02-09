@@ -1,0 +1,145 @@
+{@$list_count = 0}
+<table cond="$document_list || $notice_list" class="table table-hover">
+<!--@if($module_info->display_listheadset_button != 'N')-->
+	<thead>
+		<!--// 테이블 헤더 -->
+		<tr>
+			<block loop="$list_config=>$key,$val">
+			<th scope="col" cond="$val->type=='no' && $val->idx==-1" class="hidden-xs width70" ><a href="{getUrl('order_type',$order_type)}" title="<!--@if($order_type=="desc")-->{$lang->order_desc}<!--@else-->{$lang->order_asc}<!--@end-->">{$lang->no}</a>
+			</th>
+			<block cond="$val->type=='title' && $val->idx==-1">
+			<th scope="col" cond="$module_info->use_category=='Y'" class="hidden-xs width70">{$lang->category}
+			</th>
+			<th scope="col" class="text-center"><a href="{getUrl('sort_index','title','order_type',$order_type)}">{$lang->title} <i cond="$sort_index=='title'" class="fa fa-sort-asc fa-fw"></i></a>
+			</th>
+			</block>
+			<th scope="col" cond="$val->type=='nick_name' && $val->idx==-1" class="hidden-xs tableuser">{$lang->writer}
+			</th>
+			<th scope="col" cond="$val->type=='user_id' && $val->idx==-1" class="hidden-xs tableuser">{$lang->user_id}
+			</th>
+			<th scope="col" cond="$val->type=='user_name' && $val->idx==-1" class="hidden-xs tableuser">{$lang->user_name}
+			</th>
+			<th scope="col" cond="$val->type=='regdate' && $val->idx==-1" class="tabledate"><a href="{getUrl('sort_index','regdate','order_type',$order_type)}">{$lang->date}<i cond="$sort_index=='regdate'" class="fa fa-sort-asc fa-fw"></i></a>
+			</th>
+			<th scope="col" cond="$val->type=='last_update' && $val->idx==-1" class="hidden-xs tabledate"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">최근수정일<i cond="$sort_index=='last_update'" class="fa fa-sort-asc fa-fw"></i></a>
+			</th>
+			<th scope="col" cond="$val->type=='last_post' && $val->idx==-1" class="hidden-xs tabledate">{$lang->last_post}
+			</th>
+			<th scope="col" cond="$val->type=='readed_count' && $val->idx==-1" class="hidden-xs width70"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">조회<i cond="$sort_index=='readed_count'" class="fa fa-sort-asc fa-fw"></i></a>
+			</th>
+			<th scope="col" cond="$val->type=='voted_count' && $val->idx==-1" class="hidden-xs width70"><a href="{getUrl('sort_index','voted_count','order_type',$order_type)}">추천<i cond="$sort_index=='voted_count'" class="fa fa-sort-asc fa-fw"></i></a>
+			</th>
+			<th scope="col" cond="$val->idx!=-1" class="hidden-xs"><a href="{getUrl('sort_index',$val->eid,'order_type',$order_type)}">{$val->name}</a>
+			</th>
+			</block>
+			<th scope="col" cond="$grant->manager" class="width20"><input class="checkbox" type="checkbox" onclick="XE.checkboxToggleAll({ doClick:true });" title="Check All" />
+			</th>
+		</tr>
+	</thead>
+<!--@end-->	
+	<tbody>
+		<!--// Notice -->
+		<tr loop="$notice_list=>$no,$document" class="active">
+			<block loop="$list_config=>$key,$val">
+			<td cond="$val->type=='no' && $val->idx==-1" class="hidden-xs width70">
+				<block cond="$document_srl==$document->document_srl">&raquo;</block><strong cond="$document_srl!=$document->document_srl">{$lang->notice}</strong>
+			</td>
+			<block cond="$val->type=='title' && $val->idx==-1">
+			<td cond="$module_info->use_category=='Y'" class="hidden-xs width70" style="color:{$category_list[$document->get('category_srl')]->color}"|cond="$category_list[$document->get('category_srl')]->color!='transparent'"><strong>{$category_list[$document->get('category_srl')]->title}</strong></td>
+			<td>
+				<a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}"><strong>{$document->getTitle($module_info->subject_cut_size)}</strong></a>
+				<!--@if($document->getCommentCount())-->
+				&nbsp; <small><a href="{getUrl('document_srl', $document->document_srl)}#comment">{$document->getCommentCount()}</a></small>
+				<!--@end-->
+				<!--@if($document->getTrackbackCount())-->
+				&nbsp; <small><a href="{getUrl('document_srl', $document->document_srl)}#trackback">{$document->getTrackbackCount()}</a></small>
+				<!--@end-->
+				&nbsp;
+				<!--@if((int)($document->getRegdate('YmdHis')>date("YmdHis", time()-$module_info->duration_new*60*60)))-->
+				<small><span class="label label-primary"><b>new</b></span></small>
+				<!--@else-->
+				<!--@if((int)(zdate($document->get('last_update'),'YmdHis')>date("YmdHis", time()-$module_info->duration_new*60*60)))-->
+				<small><span class="label label-success"><b>update</b></span></small>
+				<!--@end-->
+				<!--@end-->
+				<!--@if($document->hasUploadedFiles())--><small><span class="label label-info"><b>file</b></span></small><!--@end-->
+				<!--@if($document->variables[status]=='SECRET')--><small><span class="label label-warning"><b>secret</b></span></small><!--@end-->
+			</td>
+			</block>
+			<td cond="$val->type=='nick_name' && $val->idx==-1" class="hidden-xs tableuser"><a href="#popup_menu_area" class="member_{$document->get('member_srl')} nocolorlist" onclick="return false" title="{$document->getNickName()}"><span>{$document->getNickName()}</span></a></td>
+			<td cond="$val->type=='user_id' && $val->idx==-1" class="hidden-xs tableuser">{$document->getUserID()}</td>
+			<td cond="$val->type=='user_name' && $val->idx==-1" class="hidden-xs tableuser">{$document->getUserName()}</td>
+			<td cond="$val->type=='regdate' && $val->idx==-1" class="tabledate">{$document->getRegdate('Y.m.d')}</td>
+			<td cond="$val->type=='last_update' && $val->idx==-1" class="hidden-xs tabledate">{zdate($document->get('last_update'),'Y.m.d')}</td>
+			<td cond="$val->type=='last_post' && $val->idx==-1" class="hidden-xs tabledate">
+				<block cond="(int)($document->get('comment_count'))>0">
+					<a href="{getUrl('document_srl',$document->document_srl)}#{$document->document_srl}_comment" title="{getTimeGap($document->get('last_update'), "H:i")}">{zdate($document->get('last_update'),'Y.m.d')}<small cond="$document->getLastUpdater()">(by {$document->getLastUpdater()})</small></a>
+				</block>
+				<block cond="(int)($document->get('comment_count'))==0">&nbsp;</block>
+			</td>
+			<td cond="$val->type=='readed_count' && $val->idx==-1" class="hidden-xs width70">{$document->get('readed_count')>0?$document->get('readed_count'):'0'}</td>
+			<td cond="$val->type=='voted_count' && $val->idx==-1" class="hidden-xs width70">{$document->get('voted_count')!=0?$document->get('voted_count'):'0'}</td>
+			<td cond="$val->idx!=-1" class="m_no"|cond="$val->eid!='link_url'" class="hidden-xs">{$document->getExtraValueHTML($val->idx)}</td>
+			</block>
+			<td cond="$grant->manager" class="20"><input class="checkbox" type="checkbox" name="cart" value="{$document->document_srl}" title="Check This Article" onclick="doAddDocumentCart(this)" checked="checked"|cond="$document->isCarted()" /></td>
+		</tr>
+	</tbody>
+</table>
+<div class="clearfix"></div>
+<!--// Normal -->
+<div class="media-list col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail" loop="$document_list=>$no,$document">
+	<div class="media relative padding10">
+		<a href="{getUrl('document_srl',$document->document_srl,'listStyle',$listStyle, 'cpage','')}" class="pull-left hidden-xs paddingr10">
+			<!--@if($document->thumbnailExists($module_info->thumbnail_width, $module_info->thumbnail_height, $module_info->thumbnail_type))-->
+				<!--@if($document->variables[status]!='SECRET'||$logged_info->is_admin=='Y'||$logged_info->member_srl==$document->variables[member_srl])-->
+				<div class="thumbnailgrow noimgwh  hidden-xs" style="width:{$module_info->thumbnail_width}px;"><div class="wrap">
+				<img cond="$document->thumbnailExists()" src="{$document->getThumbnail($module_info->thumbnail_width, $module_info->thumbnail_height, $module_info->thumbnail_type)}" alt="" /></div></div>				
+				<!--@else-->
+				<div class="noimgwh hidden-xs" style="width:{$module_info->thumbnail_width}px;"><div class="wrap focus"><div class="padding10">비밀글입니다</div></div></div>
+				<!--@end-->
+			<!--@else-->
+				<div class="noimgwh hidden-xs" style="width:{$module_info->thumbnail_width}px;"><div class="wrap focus"></div></div>
+			<!--@end-->
+
+		</a>
+		<div class="media-body">
+			<h5 class="media-heading paddingb10">
+				<a href="{getUrl('document_srl',$document->document_srl,'listStyle',$listStyle, 'cpage','')}" >{$document->getTitle($module_info->subject_cut_size)}</a>
+				<!--@if($document->getCommentCount())-->
+					&nbsp; <small><a href="{getUrl('document_srl', $document->document_srl)}#comment">{$document->getCommentCount()}</a></small>
+				<!--@end-->
+				<!--@if($document->getTrackbackCount())-->
+					&nbsp; <small><a href="{getUrl('document_srl', $document->document_srl)}#trackback">{$document->getTrackbackCount()}</a></small>
+				<!--@end-->
+					&nbsp;
+				<!--@if((int)($document->getRegdate('YmdHis')>date("YmdHis", time()-$module_info->duration_new*60*60)))-->
+					<small><span class="label label-primary"><b>new</b></span></small>
+				<!--@else-->
+				<!--@if((int)(zdate($document->get('last_update'),'YmdHis')>date("YmdHis", time()-$module_info->duration_new*60*60)))-->
+					<small><span class="label label-success"><b>update</b></span></small>
+				<!--@end-->
+				<!--@end-->
+				<!--@if($document->hasUploadedFiles())-->
+					<small><span class="label label-info"><b>file</b></span></small>
+				<!--@end-->
+				<!--@if($document->variables[status]=='SECRET')-->
+					<small><span class="label label-warning"><b>secret</b></span></small>
+				<!--@end-->
+				<input cond="$grant->manager" class="pull-right" type="checkbox" name="cart" value="{$document->document_srl}" title="Check" onclick="doAddDocumentCart(this)" checked="checked"|cond="$document->isCarted()" />
+			</h5>
+			<ul class="list-inline viewinfo nocolor paddingtb10">
+				<li cond="$module_info->use_category=='Y'" style="color:{$category_list[$document->get('category_srl')]->color}"|cond="$category_list[$document->get('category_srl')]->color!='transparent'"><i class="fa fa-bookmark fa-fw"></i> {$category_list[$document->get('category_srl')]->title}</li>
+				<li cond="$list_config['nick_name']"><a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false"><i class="fa fa-pencil fa-fw"></i> {$document->getNickName()}</a></li>
+				<li cond="$list_config['UserID']"><i class="fa fa-pencil fa-fw"></i> {$document->getUserID()}</li>
+				<li cond="$list_config['UserName']"><i class="fa fa-pencil fa-fw"></i> {$document->getUserName()}</li>
+				<li cond="$list_config['regdate']"><i class="fa fa-calendar fa-fw"></i> {$document->getRegdate("M d, Y")}</li>							
+				<li cond="$list_config['last_update']"><i class="fa fa-calendar-o fa-fw"></i> {zdate($document->get('last_update'),'M d, Y')}</li>
+				<li cond="$list_config['LastUpdater']"><i class="fa fa-pencil-square-o fa-fw"></i> {$document->getLastUpdater()}</li>
+				<li cond="$list_config['readed_count']">{$lang->readed_count} {$document->get('readed_count')>0?$document->get('readed_count'):'0'}</li>
+				<li cond="$list_config['voted_count']">{$lang->voted_count} {$document->get('voted_count')!=0?$document->get('voted_count'):'0'}</li>
+			</ul>							
+			<p cond="$list_config['summary']">{$document->getSummary($module_info->content_cut_size)}</p>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>

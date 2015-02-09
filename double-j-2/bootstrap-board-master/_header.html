@@ -1,0 +1,69 @@
+<load target="css/board.css" />
+<!--@if($module_info->load_bootstrap=='Y')-->
+<load target="css/bootstrap.min.css" />
+<load target="css/font-awesome.min.css" />
+<load target="js/bootstrap.min.js" />
+<script type="text/javascript">
+ jQuery("link[rel=stylesheet][href*='common/css/xe.min.css']").remove();
+</script>
+<!--@end-->
+<load target="js/bootstrap-hover-dropdown.min.js" />
+<load target="js/board.js" />
+
+
+{Context::set("admin_bar", "false")} 
+
+<!--@if(!$module_info->duration_new = (int)$module_info->duration_new)-->{@ $module_info->duration_new = 12 }<!--@end-->
+<!--@if(!$module_info->content_cut_size = (int)$module_info->content_cut_size)-->{@ $module_info->content_cut_size= 800 }<!--@end-->
+<!--@if(!$module_info->thumnailnum)-->{@ $module_info->thumnailnum = four }<!--@end-->
+
+<!--@if(!$module_info->thumbnail_type)-->{@ $module_info->thumbnail_type = 'crop'; }<!--@end-->
+<!--@if(!$module_info->thumbnail_width)-->{@ $module_info->thumbnail_width = 280; }<!--@end-->
+<!--@if(!$module_info->thumbnail_height)-->{@ $module_info->thumbnail_height = 210; }<!--@end-->
+
+<!--@if($listStyle=='gallery')-->
+    {@ $module_info->default_style = 'gallery'}
+<!--@elseif($listStyle=='webzine')-->
+    {@ $module_info->default_style = 'webzine'}
+<!--@elseif($listStyle=='list')-->
+    {@ $module_info->default_style = 'list'}
+<!--@elseif($listStyle=='card')-->
+    {@ $module_info->default_style = 'card'}	
+<!--@elseif($listStyle=='card2')-->
+    {@ $module_info->default_style = 'card2'}	
+<!--@elseif(!in_array($module_info->default_style,array('list','webzine','gallery','card','card2','blog')))-->
+    {@ $module_info->default_style = 'list'}
+<!--@end-->
+
+{@ $cate_list = array(); $current_key = null; }
+<!--@foreach($category_list as $key=>$val)-->
+	<!--@if(!$val->depth)-->
+		{@
+			$cate_list[$key] = $val;
+			$cate_list[$key]->children = array();
+			$current_key = $key;
+		}
+	<!--@elseif($current_key)-->
+		{@ $cate_list[$current_key]->children[] = $val }
+	<!--@end-->
+<!--@end-->
+
+{$module_info->header_text}
+<!--@if($module_info->title)-->
+<div class="page-header">
+	<h1><a href="{getUrl('','mid',$mid,'listStyle',$listStyle)}">{$module_info->title}</a>
+<!--@if($module_info->sub_title)-->
+	<small>{$module_info->sub_title}</small><!--@end--></h1>
+</div>
+<!--@end-->
+<!--@if($module_info->comment)-->
+<div class="alert alert-info">{$module_info->comment}</div>
+<!--@end-->
+
+{@
+ $oDB = &DB::getInstance();
+ $query = $oDB->_query('select count(*) as total from xe_documents where module_srl ='.$module_info->module_srl);
+ $result = $oDB->_fetch($query);
+ $oDocumentModel = &getModel('document');
+ $count_total = $oDocumentModel->getDocumentCount($module_info->module_srl);
+}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}로그인{% endblock %}
+{% block body %}
+
+<style>
+
+    .col-md-4 {
+        /*position: relative;*/
+        margin-top: 200px;
+
+    }
+
+</style>
+
+<body>
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+
+    <div class="container">
+        {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+        <div  class="col-md-offset-4 col-md-4">
+            <form method="post" action="check_login" class="form-signin">
+                <label for="inputEmail" class="sr-only">ID</label>
+                <input type="text" name="UserID" id="inputEmail" class="form-control" placeholder="아이디" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="UserPassword" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <!--<a href="main%20vol1(origin).html" id="btn_signin" class="btn btn-lg btn-primary btn-block" type="submit">로그인</a>-->
+                <button type="submit" id="btn_signin" class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+</body>
+{% endblock %}
