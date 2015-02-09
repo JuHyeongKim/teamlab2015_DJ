@@ -106,6 +106,7 @@ def timeline():
                                     where who_id = ?))
         order by message.pub_date desc limit ?''',
         [session['user_id'], session['user_id'], PER_PAGE]))
+    print 'messages :', messages
 
 
 @app.route('/public')
@@ -191,12 +192,10 @@ def login():
         return redirect(url_for('timeline'))
     error = None
     if request.method == 'POST':
-        user = query_db('''select * from user where
-            username = ?''', [request.form['username']], one=True)
+        user = query_db('''select * from user where username = ?''', [request.form['username']], one=True)
         if user is None:
             error = 'Invalid username'
-        elif not check_password_hash(user['pw_hash'],
-                                     request.form['password']):
+        elif not check_password_hash(user['pw_hash'], request.form['password']):
             error = 'Invalid password'
         else:
             flash('You were logged in')
